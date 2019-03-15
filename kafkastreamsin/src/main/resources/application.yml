@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        streams-in:
+          destination: messages-timestamp
+          contentType: application/json
