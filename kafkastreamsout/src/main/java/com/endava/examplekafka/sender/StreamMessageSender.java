@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -52,7 +53,7 @@ public class StreamMessageSender implements ApplicationListener<ContextRefreshed
         message.setReceiver(getRandomUser(random));
         message.setBody(generateRandomString(random, 64));
         message.setSubject(generateRandomString(random, 16));
-        message.setTimestamp(Instant.now());
+        message.setTimestamp(new Date());
 
         return message;
     }
