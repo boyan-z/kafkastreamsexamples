@@ -3,11 +3,13 @@ package com.endava.examplekafka.dto;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 public class Message {
     private String sender;
-    private String body;
     private String receiver;
-    private Instant timestamp;
+    private String subject;
+    private String body;
+    private Date timestamp;
 }
