@@ -20,6 +20,7 @@ public class StreamProcessor {
     @SendTo(Streams.MESSAGES_COUNT)
     public KStream<String, Long> process(KStream<String, Message> input) {
         input.foreach((s, message) -> log.info("Message with key {} processed.", s));
+
         return input
                 .filterNot((key, value) -> value.getReceiver().equals("Mark"))
                 .map((key, value) -> new KeyValue<>(value.getSender(), "0"))
