@@ -30,18 +30,20 @@ public class MetricService implements ApplicationListener<ContextRefreshedEvent>
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         taskExecutor.execute(() -> {
-            log.info("Writing metrics");
-            StringBuilder sb = new StringBuilder("Metrics\n");
-            showCounts().entrySet().forEach(e -> sb.append(e.toString()).append("\n"));
-            try {
-                Files.write(Paths.get("output.txt"), sb.toString().getBytes());
-            } catch (IOException e) {
-                log.error(e);
-            }
-            try {
-                Thread.sleep(PAUSE_BETWEEN_SENDING);
-            } catch (InterruptedException e) {
-                log.error(e);
+            while (true) {
+                log.info("Writing metrics");
+                StringBuilder sb = new StringBuilder("Metrics\n");
+                showCounts().entrySet().forEach(e -> sb.append(e.toString()).append("\n"));
+                try {
+                    Files.write(Paths.get("output.txt"), sb.toString().getBytes());
+                } catch (IOException e) {
+                    log.error(e);
+                }
+                try {
+                    Thread.sleep(PAUSE_BETWEEN_SENDING);
+                } catch (InterruptedException e) {
+                    log.error(e);
+                }
             }
         });
     }

@@ -14,18 +14,17 @@ import org.springframework.stereotype.Component;
 @Log4j2
 @AllArgsConstructor
 @Component
-public class AddTimestampProcessor {
+public class StreamProcessor {
 
     @StreamListener(Streams.MESSAGES_IN)
     @SendTo(Streams.MESSAGES_COUNT)
     public KStream<String, Long> process(KStream<String, Message> input) {
-        KStream<String, Long> output = input
+        input.foreach((s, message) -> log.info("Message with key {} processed.", s));
+        return input
                 .filterNot((key, value) -> value.getReceiver().equals("Mark"))
                 .map((key, value) -> new KeyValue<>(value.getSender(), "0"))
                 .groupByKey()
                 .count(Materialized.as(Streams.MAT))
                 .toStream();
-
-        return output;
     }
 }
