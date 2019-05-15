@@ -8,3 +8,6 @@ spring:
         streams-in:
           destination: messages
           contentType: application/json
+        dead-out:
+          destination: dead-out
+          contentType: application/json

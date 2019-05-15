@@ -49,7 +49,8 @@ public class MetricService implements ApplicationListener<ContextRefreshedEvent>
     }
 
     private Map<String, Long> showCounts() {
-        ReadOnlyKeyValueStore<String, Long> store = interactiveQueryService.getQueryableStore(Streams.MAT, QueryableStoreTypes.keyValueStore());
+        ReadOnlyKeyValueStore<String, Long> store =
+                interactiveQueryService.getQueryableStore(Streams.MAT, QueryableStoreTypes.keyValueStore());
 
         Map<String, Long> map = new HashMap<>();
 
