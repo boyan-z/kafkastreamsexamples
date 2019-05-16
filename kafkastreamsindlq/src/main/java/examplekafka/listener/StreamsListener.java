@@ -7,12 +7,10 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
 public class StreamsListener {
 
     @StreamListener(Streams.INPUT)
     public void handleMessages(@Payload String message) throws Exception {
         throw new Exception("Message unable to be processed.");
-        //log.info("Received message: {}", message);
     }
 }

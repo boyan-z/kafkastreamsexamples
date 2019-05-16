@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 @Component
@@ -20,7 +21,7 @@ import java.util.Random;
 @Log4j2
 public class StreamMessageSender implements ApplicationListener<ContextRefreshedEvent> {
 
-    private static final int PAUSE_BETWEEN_SENDING = 10000;
+    private static final int PAUSE_BETWEEN_SENDING = 60*1000;
     private static final List<String> users = Arrays.asList("Steve", "Bill", "Jeff", "Elon", "Tim", "Mark", "Larry",
             "Sergey", "Jack", "Larry");
 
@@ -35,7 +36,6 @@ public class StreamMessageSender implements ApplicationListener<ContextRefreshed
             while (true) {
                 Message message = generateRandomMessage();
                 streamsService.sendMessage(message);
-                log.info("Sent message \"{}\"", message.toString());
                 try {
                     Thread.sleep(PAUSE_BETWEEN_SENDING);
                 } catch (InterruptedException e) {

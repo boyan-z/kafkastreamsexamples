@@ -13,11 +13,6 @@ spring:
               autoCommitOffset: true
       bindings:
         streams-in:
-          consumer:
-            enableDlq: true
-            dlqName: dlq
-            autoCommitOnError: true
-            autoCommitOffset: true
           group: grouperror
           destination: messages
           contentType: application/json

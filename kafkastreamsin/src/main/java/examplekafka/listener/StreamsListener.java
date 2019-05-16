@@ -1,5 +1,6 @@
 package examplekafka.listener;
 
+import examplekafka.config.Streams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -9,8 +10,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class StreamsListener {
 
-    @StreamListener()
+    @StreamListener(Streams.INPUT)
     public void handleMessages(@Payload String message) {
         log.info("Received message: {}", message);
+    }
+
+    @StreamListener(Streams.DEAD_OUT)
+    public void handleDeadMessages(@Payload String message) {
+        log.info("Received message from DLQ: {}", message);
     }
 }

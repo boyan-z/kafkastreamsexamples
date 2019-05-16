@@ -6,8 +6,10 @@ spring:
           brokers: localhost:9092
       bindings:
         streams-in:
+          group: reader
           destination: messages
           contentType: application/json
         dead-out:
+          group: reader
           destination: dead-out
           contentType: application/json
