@@ -1,7 +1,8 @@
 package examplekafka.config;
 
+import examplekafka.dto.Message;
+import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
-import org.springframework.messaging.SubscribableChannel;
 
 public interface Streams {
 
@@ -9,8 +10,8 @@ public interface Streams {
     String DEAD_OUT = "dead-out";
 
     @Input(INPUT)
-    SubscribableChannel inboundMessages();
+    KStream<String, Message> inboundMessages();
 
     @Input(DEAD_OUT)
-    SubscribableChannel deadMessages();
+    KStream<String, Message> deadMessages();
 }

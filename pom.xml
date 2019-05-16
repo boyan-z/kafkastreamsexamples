@@ -10,7 +10,8 @@
         <module>kafkastreamsout</module>
         <module>kafkastreamsin</module>
         <module>kafkaprocessor</module>
-        <module>kafkaanalytics</module>
+        <module>kafkastreamsindlq</module>
+        <module>kafkastreamsmerge</module>
     </modules>
 
     <parent>

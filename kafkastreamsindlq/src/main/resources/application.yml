@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+        bindings:
+          streams-in:
+            consumer:
+              enableDlq: true
+              dlqName: dead-out
+              autoCommitOnError: true
+              autoCommitOffset: true
+      bindings:
+        streams-in:
+          group: grouperror
+          destination: messages
+          contentType: application/json
