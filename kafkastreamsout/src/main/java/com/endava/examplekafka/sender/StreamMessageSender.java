@@ -9,11 +9,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 
 @Component
@@ -21,9 +19,10 @@ import java.util.Random;
 @Log4j2
 public class StreamMessageSender implements ApplicationListener<ContextRefreshedEvent> {
 
-    private static final int PAUSE_BETWEEN_SENDING = 60*1000;
-    private static final List<String> users = Arrays.asList("Steve", "Bill", "Jeff", "Elon", "Tim", "Mark", "Larry",
+    private static final int PAUSE_BETWEEN_SENDING = 60 * 1000;
+    private static final List<String> USERS = Arrays.asList("Steve", "Bill", "Jeff", "Elon", "Tim", "Mark", "Larry",
             "Sergey", "Jack", "Larry");
+    private static final List<String> PARTITION_KEYS = Arrays.asList("A", "B");
 
     private final StreamsService streamsService;
 
@@ -35,7 +34,7 @@ public class StreamMessageSender implements ApplicationListener<ContextRefreshed
             log.info("Started sending messages.");
             while (true) {
                 Message message = generateRandomMessage();
-                streamsService.sendMessage(message);
+                streamsService.sendMessage(message, getRandomElement(PARTITION_KEYS));
                 try {
                     Thread.sleep(PAUSE_BETWEEN_SENDING);
                 } catch (InterruptedException e) {
@@ -45,12 +44,17 @@ public class StreamMessageSender implements ApplicationListener<ContextRefreshed
         });
     }
 
+    private <T> T getRandomElement(List<T> elements) {
+        Random rand = new Random();
+        return elements.get(rand.nextInt(elements.size()));
+    }
+
     private Message generateRandomMessage() {
         Random random = new Random();
 
         Message message = new Message();
-        message.setSender(getRandomUser(random));
-        message.setReceiver(getRandomUser(random));
+        message.setSender(getRandomElement(USERS));
+        message.setReceiver(getRandomElement(USERS));
         message.setBody(generateRandomString(random, 64));
         message.setSubject(generateRandomString(random, 16));
         message.setTimestamp(new Date());
@@ -58,9 +62,6 @@ public class StreamMessageSender implements ApplicationListener<ContextRefreshed
         return message;
     }
 
-    private String getRandomUser(Random random) {
-        return users.get(random.nextInt(users.size()));
-    }
 
     private static String generateRandomString(Random random, int length) {
         return random.ints(48, 122)

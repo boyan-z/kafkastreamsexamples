@@ -8,3 +8,6 @@ spring:
         streams-out:
           destination: messages
           contentType: application/json
+          #producer:
+          #  partition-key-expression: headers['partitionKey'] - 1
+          #  partition-count: 2

@@ -2,7 +2,6 @@ package com.endava.examplekafka.dto;
 
 import lombok.Data;
 
-import java.time.Instant;
 import java.util.Date;
 
 @Data

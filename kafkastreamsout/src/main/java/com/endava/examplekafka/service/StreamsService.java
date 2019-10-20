@@ -20,13 +20,18 @@ public class StreamsService {
 
     private final Streams streams;
 
-    public void sendMessage(final Message message) {
-        log.info("Sending message: {}", message.toString());
+    public void sendMessage(final Message message, final String partition) {
+        log.info("Sending message: {}, for partition {}", message.toString(), partition);
         MessageChannel messageChannel = streams.outboundStreams();
         messageChannel.send(MessageBuilder
                 .withPayload(message)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
-                .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString().getBytes())
+                .setHeader(KafkaHeaders.MESSAGE_KEY, generateId())
+                .setHeader("partitionKey", partition)
                 .build());
+    }
+
+    private byte[] generateId() {
+        return UUID.randomUUID().toString().getBytes();
     }
 }
