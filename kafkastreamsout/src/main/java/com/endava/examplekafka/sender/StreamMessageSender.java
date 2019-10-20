@@ -19,7 +19,7 @@ import java.util.Random;
 @Log4j2
 public class StreamMessageSender implements ApplicationListener<ContextRefreshedEvent> {
 
-    private static final int PAUSE_BETWEEN_SENDING = 60 * 1000;
+    private static final int PAUSE_BETWEEN_SENDING = 1000;
     private static final List<String> USERS = Arrays.asList("Steve", "Bill", "Jeff", "Elon", "Tim", "Mark", "Larry",
             "Sergey", "Jack", "Larry");
     private static final List<String> PARTITION_KEYS = Arrays.asList("A", "B");

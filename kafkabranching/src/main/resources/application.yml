@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        streams-in:
+          destination: messages
+        streams-out-1:
+          destination: fromMark
+        streams-out-2:
+          destination: fromSergey
+        streams-out-3:
+          destination: fromLarry
+      kafka:
+        binder:
+          brokers: localhost:9092
+        streams:
+          bindings:
+            streams-in:
+              consumer:
+                application-id: processor
+          binder:
+            configuration:
+              commit:
+                interval:
+                  ms: 1000
+              default:
+                key:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                value:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde

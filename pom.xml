@@ -5,13 +5,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>kafkaconsumer</module>
-        <module>kafkaproducer</module>
         <module>kafkastreamsout</module>
         <module>kafkastreamsin</module>
         <module>kafkaprocessor</module>
         <module>kafkastreamsindlq</module>
         <module>kafkastreamsmerge</module>
+        <module>kafkabranching</module>
     </modules>
 
     <parent>
