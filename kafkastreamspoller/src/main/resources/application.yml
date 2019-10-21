@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        streams-in:
+          group: pooler
+          destination: messages
+          contentType: application/json
+

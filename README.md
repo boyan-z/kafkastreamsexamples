@@ -1,8 +1,5 @@
 # kafkastreamsexamples
 **Useful links:**
-
-* http://cloud.spring.io/spring-cloud-static/Finchley.SR1/multi/multi__apache_kafka_streams_binder.html
-
-* https://spring.io/blog/2018/04/19/kafka-streams-and-spring-cloud-stream
-
+* https://spring.io/projects/spring-cloud-stream
 * https://github.com/spring-tips/spring-cloud-stream-kafka-streams
+* https://docs.confluent.io/current/streams/quickstart.html

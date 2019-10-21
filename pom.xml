@@ -11,6 +11,7 @@
         <module>kafkastreamsindlq</module>
         <module>kafkastreamsmerge</module>
         <module>kafkabranching</module>
+        <module>kafkastreamspoller</module>
     </modules>
 
     <parent>
