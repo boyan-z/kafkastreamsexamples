@@ -19,9 +19,9 @@ public class StreamProcessor {
     @SendTo({Streams.MESSAGES_OUT_1, Streams.MESSAGES_OUT_2, Streams.MESSAGES_OUT_3})
     public KStream<?, Message>[] process(KStream<String, Message> input) {
         Predicate<String, Message> fromMark = (k, v) -> v.getSender().equalsIgnoreCase("Mark");
-        Predicate<String, Message> fromSergey =  (k, v) -> v.getSender().equalsIgnoreCase("Sergey");
+        Predicate<String, Message> fromSergey = (k, v) -> v.getSender().equalsIgnoreCase("Sergey");
         Predicate<String, Message> fromLarry = (k, v) -> v.getSender().equalsIgnoreCase("Larry");
 
-        return input.peek((k,v) -> log.info("Received {}.", v.toString())).branch(fromMark, fromSergey, fromLarry);
+        return input.peek((k, v) -> log.info("Received {}.", v.toString())).branch(fromMark, fromSergey, fromLarry);
     }
 }

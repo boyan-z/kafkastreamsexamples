@@ -4,10 +4,11 @@ spring:
       kafka:
         binder:
           brokers: localhost:9092
+          autoAddPartitions: true
       bindings:
         streams-out:
           destination: messages
           contentType: application/json
-          #producer:
-          #  partition-key-expression: headers['partitionKey'] - 1
-          #  partition-count: 2
+          producer:
+            partition-key-expression: headers['partitionKey']
+            partition-count: 2

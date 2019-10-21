@@ -4,6 +4,7 @@ import com.endava.examplekafka.config.Streams;
 import com.endava.examplekafka.dto.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
@@ -16,11 +17,12 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@EnableBinding(Streams.class)
 public class StreamsService {
 
     private final Streams streams;
 
-    public void sendMessage(final Message message, final String partition) {
+    public void sendMessage(final Message message, final int partition) {
         log.info("Sending message: {}, for partition {}", message.toString(), partition);
         MessageChannel messageChannel = streams.outboundStreams();
         messageChannel.send(MessageBuilder

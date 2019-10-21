@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KafkaStreamsMergeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KafkaStreamsMergeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(KafkaStreamsMergeApplication.class, args);
+    }
 }

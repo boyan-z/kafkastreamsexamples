@@ -17,6 +17,6 @@ public class StreamsListener {
     @StreamListener
     public void mergeMessages(@Input(Streams.INPUT) KStream<String, Message> defaultMessages,
                               @Input(Streams.DEAD_OUT) KStream<String, Message> extraMessages) {
-        defaultMessages.merge(extraMessages).foreach((k,v) -> log.info("key {}; value {}", k, v));
+        defaultMessages.merge(extraMessages).foreach((k, v) -> log.info("key {}; value {}", k, v));
     }
 }
